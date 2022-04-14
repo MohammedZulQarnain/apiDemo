@@ -13,7 +13,7 @@ class Api::V1::ProductsController < ApplicationController
     product = Product.new(
       name: prod_params[:name],
       brand: prod_params[:brand],
-      price: prod_params[:price]
+      price: prod_params[:price],
       description: prod_params[:description]
     )
     if product.save
@@ -38,13 +38,13 @@ class Api::V1::ProductsController < ApplicationController
   # It uses the build-in methods .require and .permit provided by ActionContorller.
 
   private
-  def prod_params
-    params.require(:product).permit([
-      :name,
-      :brand,
-      :price,
-      :description
-    ])
-  end
+    def prod_params
+      params.require(:product).permit([
+        :name,
+        :brand,
+        :price,
+        :description
+      ])
+    end
 
 end
