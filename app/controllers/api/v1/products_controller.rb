@@ -3,7 +3,7 @@ class Api::V1::ProductsController < ApplicationController
   # index renders all items in the products table
   def index
     products = Product.all
-    render json: products, status: 200
+    render json: products.order(name: :asc), status: 200
   end
 
   # As the name implies this method lets us create a new product.
@@ -17,7 +17,7 @@ class Api::V1::ProductsController < ApplicationController
       description: prod_params[:description]
     )
     if product.save
-      render json :product, status: 200
+      render json: product, status: 200
     else
       render json: {error: "Error creating review."}
     end
@@ -28,7 +28,7 @@ class Api::V1::ProductsController < ApplicationController
   def show
     product = Product.find_by(id: params[:id])
     if product
-      render json :product, status: 200
+      render json: product, status: 200
     else
       render json: {error: "Product not found."}
     end
